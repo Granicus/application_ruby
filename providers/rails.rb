@@ -106,6 +106,7 @@ action :before_migrate do
   if new_resource.migration_command.include?('rake') && !gem_names.include?('rake')
     gem_package "rake" do
       action :install
+      gem_binary new_resource.gem_binary
     end
   end
 
@@ -163,6 +164,7 @@ def install_gems
       action :install
       source src if src
       version ver if ver && ver.length > 0
+      gem_binary new_resource.gem_binary
     end
   end
 end
